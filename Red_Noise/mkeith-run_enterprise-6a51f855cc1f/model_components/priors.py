@@ -1,0 +1,13 @@
+glep_range = [0]*100
+glf0_range = [0]*100
+glf1_range = [0]*100
+glf2_range = [0]*100
+glf0i_range = [0]*100
+glf0t_range = [0]*100
+glf0d_range = [0]*100
+gltd_range = [0]*100
+glf0d2_range = [0]*100
+gltd2_range = [0]*100
+glf0d3_range = [0]*100
+gltd3_range = [0]*100
+taug = [0]*100

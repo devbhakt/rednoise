@@ -1,0 +1,49 @@
+# Created: 2022-11-30T16:47:48.054105
+# PINT_version: 0.5.2+4702.g71e6863e
+# User: Matthew Kerr (kerrm)
+# Host: hesepc39
+# OS: Linux-5.13.0-39-generic-x86_64-with-glibc2.29
+# Format: pint
+PSRJ                           J2028_kerr
+TRACK                                  -2
+EPHEM                               DE405
+CLK                               TT(TAI)
+UNITS                                 TDB
+START                         54697.23970
+FINISH                        59886.05090
+DILATEFREQ                              N
+DMDATA                                  N
+NTOA                                   68
+CHI2                                  0.0
+RAJ                     20:28:19.90244589 1 0.00377582341030030175
+DECJ                    33:32:04.16542198 1 0.05753042254032852965
+PMRA                    37.40086864453533 1 11.576538679274254
+PMDEC                  -44.08414530233483 1 13.584988617230017
+PX                                    0.0
+POSEPOCH           57300.0000000000000000
+F0                  5.6590676494669618943 1 8.250853924045222548e-11
+F1              -1.5555084748809057927e-13 1 5.4796872366885627844e-19
+PEPOCH             55555.0000000000000000
+TZRMJD             56712.6552642315728010
+TZRSITE                               coe
+TZRFRQ                                inf
+PLANET_SHAPIRO                          N
+WAVEEPOCH 55555.000000000000000
+WAVE_OM 0.001210818381996 0
+WAVE1 -0.000059071954310 0.006402706984689
+WAVE2 -0.000886616831536 -0.000220566937219
+WAVE3 -0.000023266714949 -0.000137546131041
+WAVE4 -0.000012067591368 0.000053560847470
+WAVE5 -0.000004614719628 -0.000037809816246
+
+LATPHASE                     0.9038301471
+LATAMP                     -10.16498 1.79
+LATIDX                       5.75811 1.80
+LATNHARM                                5
+LATMINWT 0.050000
+LATPHOT 63366
+LATFN 1
+LATEDEP 0
+LATLOGL 3718.754
+LATHTEST 10037.337
+LATWN 1.645e-07

@@ -1,0 +1,35 @@
+# Created: 2022-09-08T08:32:12.493552
+# PINT_version: 0.9.1+53.gf17ff97
+# User: Deven Bhakta (dbhakta)
+# Host: nimrod
+# OS: Linux-2.6.32-754.35.1.el6.x86_64-x86_64-with-glibc2.12
+# Format: pint
+PSRJ                           J2028+3332
+#TRACK                                  -2
+#EPHEM                               DE405
+EPHEM                               DE421
+CLK                          TT(BIPM2021)
+UNITS                                 TDB
+START              54683.3524050874860420
+FINISH             59784.7173520311218776
+DILATEFREQ                              N
+DMDATA                                  N
+NTOA                               154706
+CHI2                                  0.0
+RAJ                     20:28:19.90961077 1 0.00593530138664250233
+DECJ                    33:32:04.12208413 1 0.09061906257377599916
+PMRA                    37.67571364211155 1 18.85547075232855
+PMDEC                  -46.87612489914948 1 21.107689973660783
+PX                                    0.0
+POSEPOCH           57231.0000000000000000
+F0                  5.6590451243310724294 1 1.32187548385378979655e-11
+F1               -1.55549050668646718e-13 1 9.7223961983136589756e-20
+#F2              4.7608462610541293177e-26 1 2.4840820423162542868e-27
+PEPOCH             57231.0000000000000000
+TZRMJD             55648.6552761439452315
+TZRSITE                               coe
+TZRFRQ                                inf
+PLANET_SHAPIRO                          N
+DM                                    0.0
+DMEPOCH            55225.0000000000000000
+# The Calculated Bayesian Information Criterion is -2252.819250992

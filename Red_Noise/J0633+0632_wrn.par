@@ -1,0 +1,31 @@
+# Created: 2023-05-22T14:37:09.260042
+# PINT_version: 0.9.3+608.ge0bbb05
+# User: Deven Bhakta (dbhakta)
+# Host: nimrod
+# OS: Linux-2.6.32-754.35.1.el6.x86_64-x86_64-with-glibc2.12
+# Format: pint
+PSRJ                           J0633+0632
+EPHEM                               DE421
+CLK                          TT(BIPM2021)
+UNITS                                 TDB
+START              54707.7021228898752430
+FINISH             59764.8199331859798842
+DILATEFREQ                              N
+DMDATA                                  N
+NTOA                                  102
+CHI2                    527872.7349514614
+RAJ                      6:33:44.09215655 1 0.00506625704027040269
+DECJ                     6:32:25.78785167 1 0.26556139613306339875
+PMRA                                  0.0 0 0.0
+PMDEC                                 0.0 0 0.0
+PX                                    0.0
+POSEPOCH           57233.0000000000000000
+F0                  3.3623512753136814977 1 5.5142658766117316675e-12
+F1              -8.9983985410337445303e-13 1 7.3503148051029211423e-20
+PEPOCH             57233.0000000000000000
+PLANET_SHAPIRO                          N
+DM                                    0.0
+DMEPOCH            55225.0000000000000000
+TZRMJD             55638.1552770360722222
+TZRSITE                               coe
+TZRFRQ                                inf
