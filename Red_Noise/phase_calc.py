@@ -21,7 +21,7 @@ plt.plot(mjds,D[6],'+')
 plt.xlabel(f'{params[6]} ({units[6]})')
 # %%
 fitkeys, fitvals, fiterrs = get_fit_keyvals(m, phs = 0, phserr = 0.3)
-nwalkers = 1
+nwalkers = 5
 # %%
 rand_pos = [
             fitvals + fiterrs * 0.1 * np.random.randn(len(params))
@@ -44,4 +44,20 @@ for i in range(len(rand_pos[0])-1):
 plt.plot(mjds,phs)
 # %%
 phs = D[6]*(fitvals[5]-rand_pos[0][5])+ D[5]*(fitvals[4]-rand_pos[0][4])
+# %%
+orig_phs = m.phase(t).frac % 1
+# %%
+plt.plot(orig_phs,mjds,'x')
+# %%
+phs
+# %%
+plt.plot(orig_phs,mjds,'x')
+plt.plot(orig_phs+phs,mjds,'+')
+# %%
+phs
+# %%
+plt.hist(orig_phs,bins=256)
+plt.hist(orig_phs+phs,bins=256)
+# %%
+phs % 1
 # %%
