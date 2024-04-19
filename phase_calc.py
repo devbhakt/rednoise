@@ -7,7 +7,7 @@ import astropy.units as u
 from pint.scripts.event_optimize import get_fit_keyvals
 # %%
 m = models.get_model('J2028_wrn.par')
-t = toa.load_pickle('J2028_0.5weight.pickle.gz')
+t = toa.load_pickle('J2028_all.pickle.gz')
 
 # %%
 D, params, units = m.designmatrix(t)
@@ -17,47 +17,21 @@ mjds = t.get_mjds()
 for i in range(1,len(units)):
     units[i] = units[i]*u.Hz
 # %%
-plt.plot(mjds,D[6],'+')
-plt.xlabel(f'{params[6]} ({units[6]})')
-# %%
+orig_phs = m.phase(t).frac % 1
 fitkeys, fitvals, fiterrs = get_fit_keyvals(m, phs = 0, phserr = 0.3)
-nwalkers = 5
+nwalkers = 1
 # %%
 rand_pos = [
             fitvals + fiterrs * 0.1 * np.random.randn(len(params))
             for ii in range(nwalkers)
         ]
+# %%
+%%timeit -n 10 -r 10
+orig_phs = m.phase(t).frac % 1
 
 # %%
-D[1]*(fitvals[0]-rand_pos[0][0])
-# %%
-D[6]*(fitvals[5]-rand_pos[0][5])
-# %%
+%%timeit -n 10 -r 10
 phs = np.zeros(len(mjds))
 for i in range(len(rand_pos[0])-1):
-    print(i)
-    # x = D[i+1]*(fitvals[i]-rand_pos[0][i])
-    # phs = phs + x
-    # print(x)
     phs += D[i+1]*(fitvals[i]-rand_pos[0][i])
-# %%
-plt.plot(mjds,phs)
-# %%
-phs = D[6]*(fitvals[5]-rand_pos[0][5])+ D[5]*(fitvals[4]-rand_pos[0][4])
-# %%
-orig_phs = m.phase(t).frac % 1
-# %%
-plt.plot(orig_phs,mjds,'x')
-# %%
-phs
-# %%
-plt.plot(orig_phs,mjds,'x')
-plt.plot(orig_phs+phs,mjds,'+')
-# %%
-phs
-# %%
-plt.hist(orig_phs,bins=256)
-plt.hist(orig_phs+phs,bins=256)
-# %%
-phs % 1
-# %%
+new_phase = (orig_phs+phs) % 1
