@@ -339,6 +339,10 @@ class emcee_fitter(Fitter):
             self.model, phs, phserr
         )
         self.n_fit_params = len(self.fitvals)
+        self.M, _, _ = self.model.designmatrix(self.toas)
+        self.M *= -self.model.F0.value
+        self.M = self.M.transpose()
+        self.phases = self.get_event_phases()
 
     def get_event_phases(self):
         """
@@ -347,6 +351,12 @@ class emcee_fitter(Fitter):
         phss = self.model.phase(self.toas).frac
         return phss.value % 1
 
+    def calc_phase_matrix(self,theta):
+        d_phs = np.zeros(len(self.toas))
+        for i in range(len(theta)-1):
+            d_phs += self.M[i+1] * (self.fitvals[i]-theta[i])
+        return (self.phases+d_phs) % 1 
+    
     def lnprior(self, theta):
         """
         The log prior evaulated at the parameter values specified
@@ -376,6 +386,39 @@ class emcee_fitter(Fitter):
 
         # Call PINT to compute the phases
         phases = self.get_event_phases()
+        # phases = self.calc_phase_matrix(theta)
+        lnlikelihood = profile_likelihood(
+            theta[-1], self.xtemp, phases, self.template, self.weights
+        )
+        lnpost = lnprior + lnlikelihood
+        if lnpost > maxpost:
+            # log.info("New max: %f" % lnpost)
+            # for name, val in zip(ftr.fitkeys, theta):
+            #     log.info("  %8s: %25.15g" % (name, val))
+            maxpost = lnpost
+            self.maxpost_fitvals = theta
+        return lnpost, lnprior, lnlikelihood
+
+    def lnposterior_calc(self, theta):
+        """
+        The log posterior (priors * likelihood)
+        """
+        global maxpost, numcalls, ftr
+        self.set_params(dict(zip(self.fitkeys[:-1], theta[:-1])))
+
+        # numcalls += 1
+        # if numcalls % (nwalkers * nsteps / 100) == 0:
+        #     log.info("~%d%% complete" % (numcalls / (nwalkers * nsteps / 100)))
+
+        # Evaluate the prior FIRST, then don't even both computing
+        # the posterior if the prior is not finite
+        lnprior = self.lnprior(theta)
+        if not np.isfinite(lnprior):
+            return -np.inf, -np.inf, -np.inf
+
+        # Call PINT to compute the phases
+        # phases = self.get_event_phases()
+        phases = self.calc_phase_matrix(theta)
         lnlikelihood = profile_likelihood(
             theta[-1], self.xtemp, phases, self.template, self.weights
         )
@@ -627,6 +670,13 @@ def main(argv=None):
         default=False,
         action="store_true",
         dest="noautocorr",
+    )
+    parser.add_argument(
+        "--calc_phase",
+        help="Calculates the phase at each MCMC step using the designmatrix",
+        default=False,
+        action="store_true",
+        dest="calc_phase"
     )
 
     args = parser.parse_args(argv)
@@ -892,7 +942,10 @@ def main(argv=None):
             import pathos.multiprocessing as mp
 
             def unwrapped_lnpost(theta):
-                return ftr.lnposterior(theta)
+                if args.calc_phase:
+                    return ftr.lnposterior_calc(theta)
+                else:
+                    return ftr.lnposterior(theta)
 
             with mp.ProcessPool(nodes=ncores) as pool:
                 sampler = emcee.EnsembleSampler(

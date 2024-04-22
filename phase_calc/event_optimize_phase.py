@@ -385,6 +385,38 @@ class emcee_fitter(Fitter):
             return -np.inf, -np.inf, -np.inf
 
         # Call PINT to compute the phases
+        phases = self.get_event_phases()
+        # phases = self.calc_phase_matrix(theta)
+        lnlikelihood = profile_likelihood(
+            theta[-1], self.xtemp, phases, self.template, self.weights
+        )
+        lnpost = lnprior + lnlikelihood
+        if lnpost > maxpost:
+            # log.info("New max: %f" % lnpost)
+            # for name, val in zip(ftr.fitkeys, theta):
+            #     log.info("  %8s: %25.15g" % (name, val))
+            maxpost = lnpost
+            self.maxpost_fitvals = theta
+        return lnpost, lnprior, lnlikelihood
+
+    def lnposterior_calc(self, theta):
+        """
+        The log posterior (priors * likelihood)
+        """
+        global maxpost, numcalls, ftr
+        self.set_params(dict(zip(self.fitkeys[:-1], theta[:-1])))
+
+        # numcalls += 1
+        # if numcalls % (nwalkers * nsteps / 100) == 0:
+        #     log.info("~%d%% complete" % (numcalls / (nwalkers * nsteps / 100)))
+
+        # Evaluate the prior FIRST, then don't even both computing
+        # the posterior if the prior is not finite
+        lnprior = self.lnprior(theta)
+        if not np.isfinite(lnprior):
+            return -np.inf, -np.inf, -np.inf
+
+        # Call PINT to compute the phases
         # phases = self.get_event_phases()
         phases = self.calc_phase_matrix(theta)
         lnlikelihood = profile_likelihood(
@@ -790,6 +822,7 @@ def main(argv=None):
 
     # Now define the requirements for emcee
     ftr = emcee_fitter(ts, modelin, gtemplate, weights, phs, args.phserr)
+    ftr2 = emcee_fitter(ts, modelin, gtemplate, weights, phs, args.phserr)
 
     # Use this if you want to see the effect of setting minWeight
     if args.testWeights:
@@ -920,6 +953,30 @@ def main(argv=None):
                     autocorr = run_sampler_autocorr(sampler, pos, nsteps, burnin)
             pool.close()
             pool.join()
+            pool.clear()
+
+            backend2 = emcee.backends.HDFBackend("designmatrix_phase_chains.h5")
+            backend2.reset(nwalkers, ndim)
+
+            def new_phase_lnpost(theta):
+                return ftr2.lnposterior_calc(theta)
+
+            with mp.ProcessPool(nodes=ncores) as pool:
+                sampler2 = emcee.EnsembleSampler(
+                    nwalkers,
+                    ndim,
+                    new_phase_lnpost,
+                    blobs_dtype=dtype,
+                    pool=pool,
+                    backend=backend2,
+                )
+                if args.noautocorr:
+                    sampler2.run_mcmc(pos, nsteps, progress=True)
+                else:
+                    autocorr = run_sampler_autocorr(sampler2, pos, nsteps, burnin)
+            pool.close()
+            pool.join()
+
         except ImportError:
             log.info("Pathos module not available, using single core")
             sampler = emcee.EnsembleSampler(
@@ -975,6 +1032,20 @@ def main(argv=None):
     )
     ftr.maxpost_fitvals = [chains[ii][burnin:][ind] for ii in ftr.fitkeys]
 
+    samples2 = np.transpose(sampler2.get_chain(discard=burnin), (1, 0, 2)).reshape(
+        (-1, ndim)
+    )
+    chains2 = chains_to_dict(ftr.fitkeys, sampler2)
+    blobs2 = sampler2.get_blobs()
+    lnprior_samps2 = blobs2["lnprior"]
+    lnlikelihood_samps2 = blobs2["lnlikelihood"]
+    lnpost_samps2 = lnprior_samps2 + lnlikelihood_samps2
+    ind = np.unravel_index(
+        np.argmax(lnpost_samps2[:][burnin:]), lnpost_samps2[:][burnin:].shape
+    )
+    ftr2.maxpost_fitvals = [chains2[ii][burnin:][ind] for ii in ftr.fitkeys]
+
+
     try:
         import corner
 
@@ -985,6 +1056,7 @@ def main(argv=None):
             truths=ftr.maxpost_fitvals,
             plot_contours=True,
         )
+        corner.corner(samples2,fig=fig,color='red',labels=ftr.fitkeys,bins=50,truths=maxpost_fitvals,plot_contours=True)
         fig.savefig(filename + "_triangle.png")
         plt.close()
     except ImportError:
@@ -995,12 +1067,22 @@ def main(argv=None):
     plt.savefig(filename + "_priors.png")
     plt.close()
 
+    ftr2.plot_priors(chains2, burnin, scale=True)
+    plt.savefig("designmatrix_phase_priors.png")
+    plt.close()
+
+
     # Make a phaseogram with the 50th percentile values
     # ftr.set_params(dict(zip(ftr.fitkeys, np.percentile(samples, 50, axis=0))))
     # Make a phaseogram with the best MCMC result
     ftr.set_params(dict(zip(ftr.fitkeys[:-1], ftr.maxpost_fitvals[:-1])))
     ftr.phaseogram(plotfile=filename + "_post.png")
     plt.close()
+
+    ftr2.set_params(dict(zip(ftr.fitkeys[:-1], ftr2.maxpost_fitvals[:-1])))
+    ftr2.phaseogram(plotfile="designmatrix_phase_post.png")
+    plt.close()
+
 
     # Write out the output pulse profile
     vs, xs = np.histogram(
@@ -1023,6 +1105,20 @@ def main(argv=None):
     f = open(filename + "_post.par", "w")
     f.write(ftr.model.as_parfile())
     f.close()
+
+    # Write out the par file for the best MCMC parameter est
+    centered_samples = [
+        samples2[:, i] - ftr2.maxpost_fitvals[i] for i in range(len(ftr.fitkeys))
+    ]
+    errors = [
+        np.percentile(np.abs(centered_samples[i]), 68) for i in range(len(ftr.fitkeys))
+    ]
+    ftr2.set_param_uncertainties(dict(zip(ftr.fitkeys[:-1], errors[:-1])))
+
+    f = open("designmatrix_phase_post.par", "w")
+    f.write(ftr2.model.as_parfile())
+    f.close()
+
 
     # Print the best MCMC values and ranges
     ranges = map(
