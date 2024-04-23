@@ -8,8 +8,9 @@ eventfile = 'J1231_srcprob.fits.pickle.gz'
 parfile = 'J1231.par'
 temfile = '1231.gaussians'
 
-cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=100 --nsteps=2500 --burnin 500 --clobber --usepickle --multicore --ncores 12 --no-autocorr --basename original --backend"
-#cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=100 --nsteps=2500 --burnin 500 --clobber --usepickle --multicore --ncores 6 --no-autocorr --basename phase_calc --calc_phase --backend"
+#cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=100 --nsteps=2500 --burnin 500 --clobber --usepickle --multicore --ncores 12 --no-autocorr --basename original --backend"
+cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=100 --nsteps=2500 --burnin 500 --clobber --usepickle --multicore --ncores 8 --no-autocorr --basename phase_calc --calc_phase --backend"
+
 x = cmd.split()
 x.append('--weightcol')
 x.append('4FGL J1231.1-1412')
