@@ -1,8 +1,8 @@
 Post-MCMC values (50th percentile +/- (16th/84th percentile):
 
 Maximum likelihood par file:
-# Created: 2024-04-22T15:59:08.775471
-# PINT_version: 0.9.8+272.g57884b6c
+# Created: 2024-04-22T21:10:53.000323
+# PINT_version: 0.9.8+313.gbdb54a71
 # User: Deven Bhakta (drb7tg)
 # Host: drb7tg-framework
 # OS: Linux-6.5.0-1020-oem-x86_64-with-glibc2.35
