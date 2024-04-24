@@ -4,16 +4,16 @@ import event_optimize_phase
 import numpy as np
 import pathos.multiprocessing as mp
 
-eventfile = 'J1231_srcprob.fits.pickle.gz'
-parfile = 'J1231.par'
-temfile = '1231.gaussians'
+eventfile = 'J0030+0451_P8_15.0deg_239557517_458611204_ft1weights_GEO_wt.gt.0.4.fits'
+parfile = 'PSRJ0030+0451_psrcat.par'
+temfile = 'templateJ0030.3gauss'
 
-cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=100 --nsteps=2500 --burnin 500 --clobber --usepickle --multicore --ncores 12 --no-autocorr --basename lin_original --backend"
-#cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=100 --nsteps=2500 --burnin 500 --clobber --usepickle --multicore --ncores 8 --no-autocorr --basename lin_phase_calc --calc_phase --backend"
+cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=100 --nsteps=250 --burnin 50 --clobber --usepickle --multicore --ncores 8 --no-autocorr --basename J0030_orig --backend"
+#cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=100 --nsteps=2500 --burnin 500 --clobber --usepickle --multicore --ncores 8 --no-autocorr --basename J0030_phase_calc --calc_phase --backend"
 
 x = cmd.split()
 x.append('--weightcol')
-x.append('4FGL J1231.1-1412')
+x.append('PSRJ0030+0451')
 
 print(f'Testing original event optimze')
 np.random.seed(1)
