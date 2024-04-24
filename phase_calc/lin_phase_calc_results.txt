@@ -1,0 +1,46 @@
+Post-MCMC values (50th percentile +/- (16th/84th percentile):
+
+Maximum likelihood par file:
+# Created: 2024-04-23T14:09:57.055398
+# PINT_version: 0.9.7+833.gbdb54a7.dirty
+# User: Deven Bhakta (dbhakta)
+# Host: nimrod
+# OS: Linux-2.6.32-754.35.1.el6.x86_64-x86_64-with-glibc2.12
+# Python: 3.10.8 | packaged by conda-forge | (main, Nov 22 2022, 08:23:14) [GCC 10.4.0]
+# Format: pint
+PSR                            J1231-1411
+UNITS                                 TDB
+DILATEFREQ                              N
+DMDATA                                  N
+NTOA                                    0
+RAJ                     12:31:11.31318368 1 0.00000094838057407287
+DECJ                   -14:11:43.64064502 1 0.00002983273788004226
+PMRA                  -61.954002741154376 1 0.12271050804064353
+PMDEC                   7.065091195998551 1 0.26031938693956214
+PX                           3.1924235902 0 3.0
+POSEPOCH           55000.0000000000000000
+F0                  271.45301962439845056 1 3.7516656448133289814e-12
+F1              -1.6672561208564330608e-15 1 1.903095289577946558e-20
+PEPOCH             55000.0000000000000000
+TZRMJD             55806.5670904265590053
+TZRSITE                               ssb
+TZRFRQ                                inf
+PLANET_SHAPIRO                          N
+DM                          8.09082596154 0 0.00614877412374
+BINARY                                 DD
+PB                          1.86014388299 0 9.6803456522e-10
+PBDOT                                 0.0
+A1                          2.04262982154 0 1.10856828084e-06
+A1DOT                                 0.0
+ECC                     4.43740722748e-06 0 1.5288965981e-07
+EDOT                                  0.0
+T0                 55016.7869232295630471 0 0.0923640083458
+OM                          316.128501317 0 17.8755547809
+OMDOT                                 0.0
+M2                          0.16719297767 0 0.1
+SINI                       0.159348507837 0 0.1
+A0                                    0.0
+B0                                    0.0
+GAMMA                                 0.0
+DR                                    0.0
+DTH                                   0.0
