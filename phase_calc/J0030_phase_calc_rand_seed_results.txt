@@ -1,0 +1,29 @@
+Post-MCMC values (50th percentile +/- (16th/84th percentile):
+
+Maximum likelihood par file:
+# Created: 2024-05-15T17:31:23.382073
+# PINT_version: 1.0+94.g76994bbe
+# User: Deven Bhakta (drb7tg)
+# Host: drb7tg-framework
+# OS: Linux-6.5.0-1020-oem-x86_64-with-glibc2.35
+# Python: 3.11.8 | packaged by conda-forge | (main, Feb 16 2024, 20:53:32) [GCC 12.3.0]
+# Format: pint
+PSRJ                           J0030+0451
+UNITS                                 TDB
+DILATEFREQ                              N
+DMDATA                                  N
+NTOA                                    0
+RAJ                      0:30:27.43024077 1 0.00161683772250675851
+DECJ                     4:51:39.75698531 1 0.04256532734601137236
+PMRA                  -5.3812257370005385 1 0.4599653378887041
+PMDEC                 -2.0789191121595416 1 0.7542948791278714
+PX                                    0.0
+POSEPOCH           52079.0000000000000000
+F0                  205.53069927432460418 1 1.1681322575896047056e-10
+F1              -4.2969789083763612193e-16 1 2.2350789769891952913e-19
+PEPOCH             50984.4000000000000000
+TZRMJD             56000.0000000000000000
+TZRSITE                                 1
+TZRFRQ                             1400.0
+PLANET_SHAPIRO                          N
+DM                                  4.333
