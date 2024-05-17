@@ -64,15 +64,14 @@ plt.xlabel("mjd")
 plt.show()
 # %%
 # Testing the periodogram fit
-f, Pxx_den = signal.periodogram(ftr.resids.time_resids,fs=1/len(ftr.resids.time_resids))
-plt.semilogy(f[1:], Pxx_den[1:],'x')
-plt.ylim([1e-7,0])
-plt.xlabel('frequency [Hz]')
-plt.ylabel('PSD [V**2/Hz]')
-plt.xscale('log')
-plt.yscale('log')
-plt.show()
-# %%
+# f, Pxx_den = signal.periodogram(ftr.resids.time_resids,fs=1/len(ftr.resids.time_resids))
+# plt.semilogy(f[1:], Pxx_den[1:],'x')
+# plt.ylim([1e-7,0])
+# plt.xlabel('frequency [Hz]')
+# plt.ylabel('PSD [V**2/Hz]')
+# plt.xscale('log')
+# plt.yscale('log')
+# plt.show()
 
 # %%
 f, Pxx_den = signal.welch(ftr.resids.time_resids,fs=1/len(ftr.resids.time_resids))
@@ -84,3 +83,5 @@ plt.xscale('log')
 plt.yscale('log')
 plt.show()
 # %%
+def bpl():
+    
