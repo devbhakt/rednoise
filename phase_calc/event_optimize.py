@@ -343,6 +343,7 @@ class emcee_fitter(Fitter):
         self.M *= -self.model.F0.value
         self.M = self.M.transpose()
         self.phases = self.get_event_phases()
+        self.calc_phase = False
 
     def get_event_phases(self):
         """
@@ -385,7 +386,7 @@ class emcee_fitter(Fitter):
             return -np.inf, -np.inf, -np.inf
 
         # Call PINT to compute the phases
-        if args.calc_phase:
+        if self.calc_phase:
             phases = self.calc_phase_matrix(theta)
         else:
             phases = self.get_event_phases()
@@ -923,6 +924,8 @@ def main(argv=None):
     # This way, one walker should always be in a good position
     pos[0] = ftr.fitvals
 
+    # How phase will be calculated at each step (either with the designmatrix or )
+    ftr.calc_phase = True if args.calc_phase else False
     import emcee
 
     # Setting up a backend to save the chains into an h5 file
