@@ -351,12 +351,12 @@ class emcee_fitter(Fitter):
         phss = self.model.phase(self.toas).frac
         return phss.value % 1
 
-    def calc_phase_matrix(self,theta):
+    def calc_phase_matrix(self, theta):
         d_phs = np.zeros(len(self.toas))
-        for i in range(len(theta)-1):
-            d_phs += self.M[i+1] * (self.fitvals[i]-theta[i])
-        return (self.phases+d_phs) % 1 
-    
+        for i in range(len(theta) - 1):
+            d_phs += self.M[i + 1] * (self.fitvals[i] - theta[i])
+        return (self.phases + d_phs) % 1
+
     def lnprior(self, theta):
         """
         The log prior evaulated at the parameter values specified
@@ -385,8 +385,10 @@ class emcee_fitter(Fitter):
             return -np.inf, -np.inf, -np.inf
 
         # Call PINT to compute the phases
-        phases = self.get_event_phases()
-        # phases = self.calc_phase_matrix(theta)
+        if args.calc_phase:
+            phases = self.calc_phase_matrix(theta)
+        else:
+            phases = self.get_event_phases()
         lnlikelihood = profile_likelihood(
             theta[-1], self.xtemp, phases, self.template, self.weights
         )
@@ -676,7 +678,7 @@ def main(argv=None):
         help="Calculates the phase at each MCMC step using the designmatrix",
         default=False,
         action="store_true",
-        dest="calc_phase"
+        dest="calc_phase",
     )
 
     args = parser.parse_args(argv)
@@ -942,10 +944,11 @@ def main(argv=None):
             import pathos.multiprocessing as mp
 
             def unwrapped_lnpost(theta):
-                if args.calc_phase:
-                    return ftr.lnposterior_calc(theta)
-                else:
-                    return ftr.lnposterior(theta)
+                return ftr.lnposterior(theta)
+                # if args.calc_phase:
+                #     return ftr.lnposterior_calc(theta)
+                # else:
+                #     return ftr.lnposterior(theta)
 
             with mp.ProcessPool(nodes=ncores) as pool:
                 sampler = emcee.EnsembleSampler(
