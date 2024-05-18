@@ -135,7 +135,7 @@ def measure_phase(profile, template, rotate_prof=True):
             (returned as a tuple).  These are defined as in Taylor's
             talk at the Royal Society.
     """
-    import fftfit
+    import presto.fftfit as fftfit
 
     c, amp, pha = fftfit.cprof(template)
     pha1 = pha[0]
