@@ -5,8 +5,10 @@ DM              4.333
 PEPOCH          50984.4
 F0              205.530699274922 1 0.0000001
 F1              -4.2976E-16   1 1.0e-18
-PMRA            -5.3 1 0.1          
-PMDEC           -2 1 0.1             
+PMRA            -5.3 1 1.0          
+PMDEC           -2 1 1.0             
+#PMRA            -5.3 1 0.1          
+#PMDEC           -2 1 0.1           
 POSEPOCH        52079
 C PX              4.1             
 UNITS           TDB
