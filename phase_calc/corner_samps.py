@@ -6,8 +6,8 @@ import emcee
 import pint.models as models
 
 #%%
-reader = emcee.backends.HDFBackend('lin_original_chains.h5')
-reader2 = emcee.backends.HDFBackend('lin_phase_calc_chains.h5')
+reader = emcee.backends.HDFBackend('J1231_orig_fseed_chains.h5')
+reader2 = emcee.backends.HDFBackend('J1231_phase_calc_fseed_chains.h5')
 
 # %%
 m = models.get_model('J1231.par')
