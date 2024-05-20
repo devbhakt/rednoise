@@ -1,0 +1,26 @@
+# Created: 2024-05-20T13:42:40.887913
+# PINT_version: 1.0+102.g56dbd300
+# User: Deven Bhakta (drb7tg)
+# Host: drb7tg-framework
+# OS: Linux-6.5.0-1020-oem-x86_64-with-glibc2.35
+# Python: 3.11.8 | packaged by conda-forge | (main, Feb 16 2024, 20:53:32) [GCC 12.3.0]
+# Format: pint
+PSRJ                           J0030+0451
+UNITS                                 TDB
+DILATEFREQ                              N
+DMDATA                                  N
+NTOA                                    0
+RAJ                      0:30:27.43029984 1 0.00182730606486103376
+DECJ                     4:51:39.76039285 1 0.06655680096221779085
+PMRA                   -5.390667015897555 1 2.032635799930275
+PMDEC                  -2.538589347051352 1 4.935670555967502
+PX                                    0.0
+POSEPOCH           52079.0000000000000000
+F0                  205.53069927429393715 1 7.126232048904061935e-11
+F1              -4.2962935576246434685e-16 1 1.6586027673290523204e-19
+PEPOCH             50984.4000000000000000
+PLANET_SHAPIRO                          N
+DM                                  4.333
+TZRMJD             56000.0000000000000000
+TZRSITE                                 1
+TZRFRQ                             1400.0
