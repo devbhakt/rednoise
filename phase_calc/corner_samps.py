@@ -6,8 +6,8 @@ import emcee
 import pint.models as models
 
 #%%
-reader = emcee.backends.HDFBackend('J1231_orig_rseed_chains.h5')
-reader2 = emcee.backends.HDFBackend('J1231_phase_calc_rseed_chains.h5')
+reader = emcee.backends.HDFBackend('J1231_orig_fseed_chains.h5')
+reader2 = emcee.backends.HDFBackend('J1231_phase_calc_fseed_chains.h5')
 
 # %%
 m = models.get_model('J1231.par')
@@ -53,6 +53,145 @@ maxpost_calc = maxpost(reader2,chains_calc,fitkeys,burnin=500)
 # %%
 figure = corner.corner(samples_orig,bins=50,labels=fitkeys,truths=maxpost_orig,plot_contours=True,color='blue')
 corner.corner(samples_calc,bins=50,labels=fitkeys,truths=maxpost_calc,plot_contours=True,color='red',fig=figure)
-figure.savefig('rseed_compare_samps_triangle.png')
+figure.savefig('fseed_compare_samps_triangle.png')
+plt.close()
+
+# %%
+orig_fitvals = np.array([getattr(m,p).value for p in fitkeys[:-1]])
+
+# %%
+def plot_priors(
+    model,
+    chains1,
+    chains2,
+    maxpost_fitvals1=None,
+    maxpost_fitvals2=None,
+    fitvals=None,
+    burnin=100,
+    bins=100,
+    scale=False,
+):
+    """Plot of priors and the post-MCMC histogrammed samples
+
+    Show binned samples, prior probability distribution and an initial
+    gaussian probability distribution plotted with 2 sigma, maximum
+    posterior and original fit values marked.
+
+    Parameters
+    ----------
+    model : pint.models.timing_model.TimingModel
+        The initial timing model for fitting
+    chains1 : dict
+        Post MCMC integration chains that contain the fitter keys and post
+        MCMC samples from the first set of chains.
+    chains2 : dict
+        Post MCMC integration chains that contain the fitter keys and post
+        MCMC samples from the second set of chains.
+    maxpost_fitvals : list, optional
+        The maximum posterior values returned from MCMC integration for each
+        fitter key. Plots a vertical dashed line to denote the maximum
+        posterior value in relation to the histogrammed samples. If the
+        values are not provided, then the lines are not plotted
+    fitvals : list, optional
+        The original parameter fit values. Plots vertical dashed lines to
+        denote the original parameter fit values in relation to the
+        histogrammed samples. If the values are not provided, then the
+        lines are not plotted.
+    burnin : int
+        The number of steps that are the burnin in the MCMC integration
+    bins : int
+        Number of bins used in the histogram
+    scale : bool
+        If True, the priors will be scaled to the peak of the histograms.
+        If False, the priors will be plotted independent of the histograms.
+        In certain cases, such as broad priors, the priors or histograms
+        might not be apparent on the same plot due to one being significantly
+        larger than the other. The scaling is for visual purposes to clearly
+        plot the priors with the samples
+    """
+    keys = list(chains1.keys())
+    values1 = [chains1[k][burnin:].flatten() for k in keys]
+    values2 = [chains2[k][burnin:].flatten() for k in keys]
+
+    # priors = []
+    x_range = []
+    counts1 = []
+    counts2 = []
+
+    for i, key in enumerate(keys[:-1]):
+        x_range.append(np.linspace(min(values1[i].min(), values2[i].min()), 
+                                   max(values1[i].max(), values2[i].max()), num=bins))
+        # priors.append(getattr(model, key).prior.pdf(x_range[i]))
+        a1, x = np.histogram(values1[i], bins=bins, density=True)
+        a2, x = np.histogram(values2[i], bins=bins, density=True)
+        counts1.append(a1)
+        counts2.append(a2)
+
+    fig, axs = plt.subplots(len(keys), figsize=(8, 11), constrained_layout=True)
+
+    for i, p in enumerate(keys[:-1]):
+        axs[i].set_xlabel(
+            f"{str(p)}: Exact Calc = "
+            + "{:.9e}".format(values1[i].mean())
+            + " Phase Calc = "
+            + "{:.9e}".format(values2[i].mean())
+            + " ("
+            + str(getattr(model, p).units)
+            + ")"
+        )
+        # axs[i].axvline(
+            # -2 * values1[i].std(), color="b", linestyle="--", label="2 sigma"
+        # )
+        # axs[i].axvline(2 * values1[i].std(), color="b", linestyle="--")
+        # axs[i].axvline(
+            # -2 * values2[i].std(), color="r", linestyle="--", label="2 sigma (Set 2)"
+        # )
+        # axs[i].axvline(2 * values2[i].std(), color="r", linestyle="--")
+        axs[i].hist(
+            values1[i], bins=bins, density=True, alpha=0.5, label="Exact Calc"
+        )
+        axs[i].hist(
+            values2[i], bins=bins, density=True, alpha=0.5, label="Phase Calc"
+        )
+        # if scale:
+        #     axs[i].plot(
+        #         x_range[i] - values1[i].mean(),
+        #         priors[i] * counts1[i].max() / priors[i].max(),
+        #         label="Prior Probability",
+        #         color="g",
+        #     )
+        # else:
+        #     axs[i].plot(
+        #         x_range[i] - values1[i].mean(),
+        #         priors[i],
+        #         label="Prior Probability",
+        #         color="g",
+        #     )
+        if maxpost_fitvals1 is not None:
+            axs[i].axvline(
+                maxpost_fitvals1[i],
+                color="c",
+                linestyle="--",
+                label="Maximum Likelihood: Exact Value",
+            )
+            axs[i].axvline(
+                maxpost_fitvals2[i],
+                color="r",
+                linestyle="--",
+                label="Maximum Likelihood: Calc Value",
+            )
+        if fitvals is not None:
+            axs[i].axvline(
+                fitvals[i],
+                color="m",
+                linestyle="--",
+                label="Original Parameter Fit Value",
+            )
+    handles, labels = axs[0].get_legend_handles_labels()
+    axs[-1].set_axis_off()
+    axs[-1].legend(handles, labels)
+# %%
+plot_priors(m,chains_orig,chains_calc,maxpost_orig,maxpost_calc,orig_fitvals,burnin=500)
+plt.savefig('fseed_compare_samps.png')
 plt.close()
 # %%
