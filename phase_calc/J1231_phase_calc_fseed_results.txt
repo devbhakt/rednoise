@@ -1,27 +1,30 @@
 Post-MCMC values (50th percentile +/- (16th/84th percentile):
 
 Maximum likelihood par file:
-# Created: 2024-05-17T16:29:03.595654
-# PINT_version: 1.0+102.g56dbd30
-# User: Deven Bhakta (dbhakta)
-# Host: nimrod
-# OS: Linux-2.6.32-754.35.1.el6.x86_64-x86_64-with-glibc2.12
-# Python: 3.10.9 | packaged by conda-forge | (main, Feb  2 2023, 20:20:04) [GCC 11.3.0]
+# Created: 2024-05-20T14:14:52.230809
+# PINT_version: 1.0+102.g56dbd300
+# User: Deven Bhakta (drb7tg)
+# Host: drb7tg-framework
+# OS: Linux-6.5.0-1020-oem-x86_64-with-glibc2.35
+# Python: 3.11.8 | packaged by conda-forge | (main, Feb 16 2024, 20:53:32) [GCC 12.3.0]
 # Format: pint
 PSR                            J1231-1411
 UNITS                                 TDB
 DILATEFREQ                              N
 DMDATA                                  N
 NTOA                                    0
-RAJ                     12:31:11.31318383 1 0.00000090930782903342
-DECJ                   -14:11:43.64064753 1 0.00003025406485335225
-PMRA                   -61.93674038625711 1 0.1255565242566187
-PMDEC                   7.086708923340051 1 0.264842944229196
+RAJ                     12:31:11.31318366 1 0.00000045365746359494
+DECJ                   -14:11:43.64065568 1 0.00002055707284398522
+PMRA                   -50.06041353259738 1 3.3549539774690444
+PMDEC                   20.91489641345178 1 6.171929774393649
 PX                           3.1924235902 0 3.0
-POSEPOCH           55000.0000000000000000
-F0                  271.45301962439788213 1 3.8085090636741369963e-12
-F1              -1.6672531399674482967e-15 1 1.9026420719090584887e-20
-PEPOCH             55000.0000000000000000
+POSEPOCH           57305.3621923917962704
+F0                  271.45301962442033528 1 1.6257217794191092253e-11
+F1              -1.6653207141366902285e-15 1 8.145371655123835409e-19
+PEPOCH             57305.3621923917962704
+TZRMJD             55806.5670904265590045
+TZRSITE                               ssb
+TZRFRQ                                inf
 PLANET_SHAPIRO                          N
 DM                          8.09082596154 0 0.00614877412374
 BINARY                                 DD
@@ -41,6 +44,3 @@ B0                                    0.0
 GAMMA                                 0.0
 DR                                    0.0
 DTH                                   0.0
-TZRMJD             55806.5670904265590053
-TZRSITE                               ssb
-TZRFRQ                                inf
