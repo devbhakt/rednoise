@@ -6,8 +6,8 @@ import emcee
 import pint.models as models
 
 #%%
-reader = emcee.backends.HDFBackend('J1231_orig_fseed_chains.h5')
-reader2 = emcee.backends.HDFBackend('J1231_phase_calc_fseed_chains.h5')
+reader = emcee.backends.HDFBackend('J1231_orig_rseed_chains.h5')
+reader2 = emcee.backends.HDFBackend('J1231_phase_calc_rseed_chains.h5')
 
 # %%
 m = models.get_model('J1231.par')
@@ -53,6 +53,6 @@ maxpost_calc = maxpost(reader2,chains_calc,fitkeys,burnin=500)
 # %%
 figure = corner.corner(samples_orig,bins=50,labels=fitkeys,truths=maxpost_orig,plot_contours=True,color='blue')
 corner.corner(samples_calc,bins=50,labels=fitkeys,truths=maxpost_calc,plot_contours=True,color='red',fig=figure)
-figure.savefig('compare_samps_triangle.png')
+figure.savefig('rseed_compare_samps_triangle.png')
 plt.close()
 # %%
