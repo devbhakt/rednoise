@@ -11,7 +11,7 @@ reader2 = emcee.backends.HDFBackend('J0030_phase_calc_fseed_chains.h5')
 
 # %%
 #m = models.get_model('J1231.par')
-m=models.get_model('J0030_orig_fixed_seed_post.par')
+m=models.get_model('J0030_updated.par')
 fitkeys = m.free_params
 fitkeys.append('PHASE')
 burnin=50

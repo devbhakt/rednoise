@@ -1,29 +1,29 @@
 Post-MCMC values (50th percentile +/- (16th/84th percentile):
 
 Maximum likelihood par file:
-# Created: 2024-05-20T15:04:10.806547
-# PINT_version: 1.0+102.g56dbd30
-# User: Deven Bhakta (dbhakta)
-# Host: nimrod
-# OS: Linux-2.6.32-754.35.1.el6.x86_64-x86_64-with-glibc2.12
-# Python: 3.10.9 | packaged by conda-forge | (main, Feb  2 2023, 20:20:04) [GCC 11.3.0]
+# Created: 2024-05-20T15:47:23.518239
+# PINT_version: 1.0+102.g56dbd300
+# User: Deven Bhakta (drb7tg)
+# Host: drb7tg-framework
+# OS: Linux-6.5.0-1020-oem-x86_64-with-glibc2.35
+# Python: 3.11.8 | packaged by conda-forge | (main, Feb 16 2024, 20:53:32) [GCC 12.3.0]
 # Format: pint
 PSRJ                           J0030+0451
 UNITS                                 TDB
 DILATEFREQ                              N
 DMDATA                                  N
 NTOA                                    0
-RAJ                      0:30:27.43107146 1 0.00206789626702175112
-DECJ                     4:51:39.72919505 1 0.07178568345260316619
-PMRA                    -6.68242795107542 1 2.731077013110404
-PMDEC                  0.8365729519771177 1 6.252777713049694
+RAJ                      0:30:27.42622377 1 0.00099339660737385294
+DECJ                     4:51:39.74217120 1 0.03457439536589390627
+PMRA                   -6.274955593070098 1 2.9354464641224727
+PMDEC                 -0.4092699965763842 1 6.8371095817448175
 PX                                    0.0
-POSEPOCH           52079.0000000000000000
-F0                  205.53069927432434838 1 6.9633188104489818215e-11
-F1              -4.2970036471470159478e-16 1 1.6277301072626628828e-19
-PEPOCH             50984.4000000000000000
-PLANET_SHAPIRO                          N
-DM                                  4.333
+POSEPOCH           55950.3784468948433641
+F0                  205.53069908995709625 1 4.8032688937382772565e-12
+F1              -4.2972145818432169226e-16 1 1.6816703674478349183e-19
+PEPOCH             55950.3784468948433641
 TZRMJD             56000.0000000000000000
 TZRSITE                                 1
 TZRFRQ                             1400.0
+PLANET_SHAPIRO                          N
+DM                                  4.333

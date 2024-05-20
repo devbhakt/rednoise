@@ -356,7 +356,7 @@ class emcee_fitter(Fitter):
         d_phs = np.zeros(len(self.toas))
         for i in range(len(theta) - 1):
             d_phs += self.M[i + 1] * (self.fitvals[i] - theta[i])
-        return (self.phases + d_phs) % 1
+        return (self.phases - d_phs) % 1
 
     def lnprior(self, theta):
         """

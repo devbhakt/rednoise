@@ -1,27 +1,27 @@
 Post-MCMC values (50th percentile +/- (16th/84th percentile):
 
 Maximum likelihood par file:
-# Created: 2024-05-20T15:08:47.059899
-# PINT_version: 1.0+102.g56dbd30
-# User: Deven Bhakta (dbhakta)
-# Host: nimrod
-# OS: Linux-2.6.32-754.35.1.el6.x86_64-x86_64-with-glibc2.12
-# Python: 3.10.9 | packaged by conda-forge | (main, Feb  2 2023, 20:20:04) [GCC 11.3.0]
+# Created: 2024-05-20T15:41:52.611295
+# PINT_version: 1.0+102.g56dbd300
+# User: Deven Bhakta (drb7tg)
+# Host: drb7tg-framework
+# OS: Linux-6.5.0-1020-oem-x86_64-with-glibc2.35
+# Python: 3.11.8 | packaged by conda-forge | (main, Feb 16 2024, 20:53:32) [GCC 12.3.0]
 # Format: pint
 PSRJ                           J0030+0451
 UNITS                                 TDB
 DILATEFREQ                              N
 DMDATA                                  N
 NTOA                                    0
-RAJ                      0:30:27.43008464 1 0.00216536747961093567
-DECJ                     4:51:39.75491406 1 0.07485687295448428813
-PMRA                   -3.942287626821379 1 2.8196095363040214
-PMDEC                  -4.607453149377584 1 6.4924388155856745
+RAJ                      0:30:27.42641705 1 0.00094162319541624118
+DECJ                     4:51:39.73587288 1 0.03281955297929073367
+PMRA                   -6.369149668680221 1 2.8264796872093587
+PMDEC                -0.35329215524182767 1 6.540917467608488
 PX                                    0.0
-POSEPOCH           52079.0000000000000000
-F0                  205.53069927428964547 1 7.0173200583667494357e-11
-F1              -4.2961422112703016583e-16 1 1.6402911527884635006e-19
-PEPOCH             50984.4000000000000000
+POSEPOCH           55950.3784468948433641
+F0                  205.53069908995786363 1 4.8885340220294892788e-12
+F1              -4.2973481404966134248e-16 1 1.7091165460882354756e-19
+PEPOCH             55950.3784468948433641
 PLANET_SHAPIRO                          N
 DM                                  4.333
 TZRMJD             56000.0000000000000000
