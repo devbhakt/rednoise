@@ -1,29 +1,29 @@
 Post-MCMC values (50th percentile +/- (16th/84th percentile):
 
 Maximum likelihood par file:
-# Created: 2024-05-20T14:15:40.854038
-# PINT_version: 1.0+102.g56dbd300
-# User: Deven Bhakta (drb7tg)
-# Host: drb7tg-framework
-# OS: Linux-6.5.0-1020-oem-x86_64-with-glibc2.35
-# Python: 3.11.8 | packaged by conda-forge | (main, Feb 16 2024, 20:53:32) [GCC 12.3.0]
+# Created: 2024-05-20T15:08:47.059899
+# PINT_version: 1.0+102.g56dbd30
+# User: Deven Bhakta (dbhakta)
+# Host: nimrod
+# OS: Linux-2.6.32-754.35.1.el6.x86_64-x86_64-with-glibc2.12
+# Python: 3.10.9 | packaged by conda-forge | (main, Feb  2 2023, 20:20:04) [GCC 11.3.0]
 # Format: pint
 PSRJ                           J0030+0451
 UNITS                                 TDB
 DILATEFREQ                              N
 DMDATA                                  N
 NTOA                                    0
-RAJ                      0:30:27.43001537 1 0.00165716867348564257
-DECJ                     4:51:39.76275896 1 0.05648561741544710912
-PMRA                    -4.03494229760169 1 2.039358535899493
-PMDEC                  -4.961675398080892 1 4.66745540103739
+RAJ                      0:30:27.43008464 1 0.00216536747961093567
+DECJ                     4:51:39.75491406 1 0.07485687295448428813
+PMRA                   -3.942287626821379 1 2.8196095363040214
+PMDEC                  -4.607453149377584 1 6.4924388155856745
 PX                                    0.0
 POSEPOCH           52079.0000000000000000
-F0                  205.53069927432289887 1 8.111555871437303722e-11
-F1              -4.2969397700393878313e-16 1 1.901961781582513486e-19
+F0                  205.53069927428964547 1 7.0173200583667494357e-11
+F1              -4.2961422112703016583e-16 1 1.6402911527884635006e-19
 PEPOCH             50984.4000000000000000
+PLANET_SHAPIRO                          N
+DM                                  4.333
 TZRMJD             56000.0000000000000000
 TZRSITE                                 1
 TZRFRQ                             1400.0
-PLANET_SHAPIRO                          N
-DM                                  4.333
