@@ -14,7 +14,7 @@ eventfile = 'J1231_srcprob.fits.pickle.gz'
 parfile = 'J1231_updated.par'
 temfile = '1231.gaussians'
 
-cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=64 --nsteps=1250 --burnin 250 --clobber --usepickle --multicore --ncores 8 --no-autocorr --basename J1231_orig_fseed --backend"
+cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=64 --nsteps=1250 --burnin 250 --clobber --usepickle --multicore --ncores 16 --no-autocorr --basename J1231_orig_fseed --backend"
 #cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=64 --nsteps=1250 --burnin 250 --clobber --usepickle --multicore --ncores 8 --no-autocorr --basename J1231_phase_calc_fseed --calc_phase --backend"
 
 x = cmd.split()

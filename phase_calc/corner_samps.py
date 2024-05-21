@@ -6,12 +6,12 @@ import emcee
 import pint.models as models
 
 #%%
-reader = emcee.backends.HDFBackend('J0030_orig_fseed_chains.h5')
-reader2 = emcee.backends.HDFBackend('J0030_phase_calc_fseed_chains.h5')
+reader = emcee.backends.HDFBackend('J1231_orig_fseed_chains.h5')
+reader2 = emcee.backends.HDFBackend('J1231_phase_calc_fseed_chains.h5')
 
 # %%
-#m = models.get_model('J1231.par')
-m=models.get_model('J0030_updated.par')
+m = models.get_model('J1231_updated.par')
+#m=models.get_model('J0030_updated.par')
 fitkeys = m.free_params
 fitkeys.append('PHASE')
 burnin=50
@@ -191,7 +191,7 @@ red_line = mlines.Line2D([],[],color='red',label='DM Calc')
 figure = corner.corner(samples_orig,bins=50,labels=fitkeys,truths=maxpost_orig,plot_contours=True,color='blue')
 corner.corner(samples_calc,bins=50,labels=fitkeys,truths=maxpost_calc,plot_contours=True,color='red',fig=figure)
 plt.legend(handles=[blue_line,red_line],bbox_to_anchor=(0.,1.0,1.,.0), loc=4,fontsize=16)
-figure.savefig('J0030_fseed_compare_samps_triangle.png')
+figure.savefig('J1231_fseed_compare_samps_triangle.png')
 plt.close()
 
 # %%
@@ -199,6 +199,6 @@ orig_fitvals = np.array([getattr(m,p).value for p in fitkeys[:-1]])
 
 # %%
 plot_priors(m,chains_orig,chains_calc,maxpost_orig,maxpost_calc,orig_fitvals,burnin)
-plt.savefig('J0030_fseed_compare_samps.png')
+plt.savefig('J1231_fseed_compare_samps.png')
 plt.close()
 # %%
