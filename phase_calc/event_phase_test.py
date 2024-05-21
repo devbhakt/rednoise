@@ -14,8 +14,8 @@ eventfile = 'J1231_srcprob.fits.pickle.gz'
 parfile = 'J1231_updated.par'
 temfile = '1231.gaussians'
 
-cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=64 --nsteps=1250 --burnin 250 --clobber --usepickle --multicore --ncores 16 --no-autocorr --basename J1231_orig_fseed --backend"
-#cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=64 --nsteps=1250 --burnin 250 --clobber --usepickle --multicore --ncores 8 --no-autocorr --basename J1231_phase_calc_fseed --calc_phase --backend"
+cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=64 --nsteps=1250 --burnin 250 --clobber --usepickle --multicore --ncores 16 --no-autocorr --basename J1231_orig_rseed --backend"
+#cmd = f"{eventfile} {parfile} {temfile} --minWeight=0.1 --nwalkers=64 --nsteps=1250 --burnin 250 --clobber --usepickle --multicore --ncores 16 --no-autocorr --basename J1231_phase_calc_rseed --calc_phase --backend"
 
 x = cmd.split()
 x.append('--weightcol')
@@ -23,7 +23,7 @@ x.append('--weightcol')
 x.append('4FGL J1231.1-1412')
 
 print(f'Testing original event optimze')
-np.random.seed(1)
+#np.random.seed(1)
 #start_time = time.time()
 event_optimize.main(x)
 #end_time = time.time()
