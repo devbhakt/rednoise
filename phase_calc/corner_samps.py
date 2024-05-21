@@ -14,7 +14,7 @@ m = models.get_model('J1231_updated.par')
 #m=models.get_model('J0030_updated.par')
 fitkeys = m.free_params
 fitkeys.append('PHASE')
-burnin=50
+burnin=250
 # %%
 def plot_priors(
     model,
