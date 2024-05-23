@@ -40,7 +40,7 @@ def main():
     phs = np.zeros(len(mjds))
     for i in range(len(rand_pos[0])-1):
         phs += D[i+1]*(fitvals[i]-rand_pos[0][i])
-    new_phase = (orig_phs+phs) % 1
+    new_phase = (orig_phs-phs) % 1
     end_time = time.time()
     design_dt = (end_time-start_time) * u.s
 
